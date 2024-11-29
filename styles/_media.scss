@@ -7,8 +7,8 @@ $tablet: 102.3rem;
 $mobile-above: 76.8rem;
 $mobile: 76.7rem;
 
-$mobile-s-above: 481px;
-$mobile-s: 480px;
+$mobile-s-above: 48.1rem;
+$mobile-s: 48rem;
 
 @mixin desktop-above {
     @media (min-width: $desktop-above) {
