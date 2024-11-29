@@ -1,0 +1,257 @@
+/**
+  Normalizing the box model
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+    Remove left padding for list tags
+    with a class attribute
+  */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+    Remove outer margins for the body and two other tags
+    with a class attribute
+  */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+    Remove vertical outer margins for specific tags
+    with a class attribute
+  */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+    Remove the default marker for unordered lists
+    with a class attribute
+  */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/**
+    Reset vertical outer margins for paragraphs,
+    declare a local variable for bottom margin
+    to avoid interference with more complex selectors
+  */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+    Add bottom outer margin for paragraphs without a class attribute
+    that are not the last among their siblings
+  */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+    Simplify working with images
+  */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+    Inherit font properties for input fields
+  */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Useful in most situations
+    (e.g., when you need to "stick" the footer to the bottom of the site)
+   */
+  height: 100%;
+  /**
+    Set 1rem to equal 10px
+   */
+  font-size: 62.5%;
+  /**
+    Smooth scrolling
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Useful in most situations
+    (e.g., when you need to "stick" the footer to the bottom of the site)
+   */
+  min-height: 100%;
+  /**
+    Unified line height
+   */
+  line-height: 1.5;
+}
+
+/**
+    Standardize the color of SVG elements
+  */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+    Fix bug with delayed color change when interacting with SVG elements
+  */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+    Remove all animations and transitions for users
+    who prefer not to use them
+  */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/SpaceGrotesk-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/SpaceGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --color-dark: #191A23;
+  --color-dark-alt: #292A32;
+  --color-light: #FFFFFF;
+  --color-accent: #B9FF66;
+  --color-gray: #F3F3F3;
+  --color-gray-alt: #898989;
+  --border: 1px solid var(--color-dark);
+  --border-radius: 14px;
+  --border-radius-small: 7px;
+  --border-radius-large: 45px;
+  --shadow: 0 5px 0 0 var(--color-dark);
+  --font-family-base: "Space Grotesk", sans-serif;
+  --container-width: 124rem;
+  --container-padding-x: 2rem;
+  --section-padding-y: 7rem;
+  --input-height: 6rem;
+  --button-height: 6.8rem;
+  --transition-duration: 0.2s;
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  -webkit-clip-path: inset(100%) !important;
+          clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+body {
+  font-size: clamp(1.6rem, 1.5148514851rem + 0.198019802vw, 1.8rem);
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  line-height: 1.28;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+a,
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+}
+
+h1, .h1 {
+  font-size: clamp(4.3rem, 3.5762376238rem + 1.6831683168vw, 6rem);
+}
+
+h2, .h2 {
+  font-size: clamp(3.6rem, 3.4297029703rem + 0.396039604vw, 4rem);
+}
+
+h3, .h3 {
+  font-size: clamp(2.6rem, 2.4297029703rem + 0.396039604vw, 3rem);
+}
+
+h4, .h4 {
+  font-size: clamp(1.8rem, 1.7148514851rem + 0.198019802vw, 2rem);
+}/*# sourceMappingURL=styles.css.map */
